@@ -47,6 +47,7 @@ web_modules/
 
 # TypeScript cache
 *.tsbuildinfo
+next-env.d.ts
 
 # Optional npm cache directory
 .npm
@@ -74,10 +75,7 @@ web_modules/
 
 # dotenv environment variable files
 .env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+.env*.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -86,6 +84,12 @@ web_modules/
 # Next.js build output
 .next
 out
+
+# production
+/build
+
+# vercel
+.vercel
 
 # Nuxt.js build / generate output
 .nuxt
