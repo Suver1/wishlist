@@ -1,8 +1,12 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import Script from 'next/script'
+import { getData } from './wishlistData'
+import Link from 'next/link'
 
-export default function Home() {
+export default async function Home() {
+  const wishlist = await getData()
+
   return (
     <main className={styles.main}>
       <Script
@@ -10,7 +14,7 @@ export default function Home() {
         crossOrigin="anonymous"
         strategy="beforeInteractive"
       />
-      <h1 className={styles.heading}>
+      <h1 className={`${styles.heading} ${styles.backgroundGradient}`}>
         <div className={styles.treeIconContainer}>
           <i
             className={`${styles.treeIcon} ${styles.pulse} fa-solid fa-tree`}
@@ -18,7 +22,32 @@ export default function Home() {
         </div>
         Ønskeliste Andreas
       </h1>
-      <div className={styles.center}>
+      <div className={styles.wishlist__container}>
+        {Object.entries(wishlist).map(([category, items]) => (
+          <div key={category} className={styles.wishlist__category}>
+            <h2 className={styles.subHeading}>{category}</h2>
+            {items.map((item) => (
+              <div key={item.name} className={styles.wishlist__item}>
+                {(item.url && (
+                  <Link
+                    href={item.url}
+                    target="_blank"
+                    rel="nofollow noopener"
+                    className={styles.wishlist__link}
+                  >
+                    {item.name}{' '}
+                    <i
+                      className={`${styles.wishlist__linkIcon} fas fa-external-link-alt`}
+                    ></i>
+                  </Link>
+                )) ||
+                  item.name}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className={`${styles.logoContainer} ${styles.backgroundGradient}`}>
         <Image
           className={styles.logo}
           src="/christmas-hat.png"
