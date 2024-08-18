@@ -2,7 +2,8 @@ name: Deploy Next.js site to self hosted server
 
 on:
   push:
-    branches: ['main']
+    branches:
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -66,19 +67,9 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
         env:
           GOOGLE_SHEETS_URL: ${{ vars.GOOGLE_SHEETS_URL }}
-      #- name: Upload artifact
-      #  uses: actions/upload-pages-artifact@v2
-      #  with:
-      #    path: ./out
-
-  # Deployment job
-  #deploy:
-  #  environment:
-  #    name: github-pages
-  #    url: ${{ steps.deployment.outputs.page_url }}
-  #  runs-on: ubuntu-latest
-  #  needs: build
-  #  steps:
-  #    - name: Deploy to GitHub Pages
-  #      id: deployment
-  #      uses: actions/deploy-pages@v2
+      - name: Deploy with rsync
+        run: |
+          rsync -avz --chown=:www-data ./out/ /var/www/wishlist-new
+          if [ -d /var/www/wishlist-old ]; then rm -rf /var/www/wishlist-old; fi
+          if [ -d /var/www/wishlist ]; then mv /var/www/wishlist /var/www/wishlist-old; fi
+          mv /var/www/wishlist-new /var/www/wishlist
