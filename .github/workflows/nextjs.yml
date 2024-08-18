@@ -16,6 +16,7 @@ concurrency:
 jobs:
   build:
     runs-on: self-hosted
+    environment: production
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -62,9 +63,9 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
-        env:
-          GOOGLE_SHEETS_URL: ${{ env.GOOGLE_SHEETS_URL }}
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        env:
+          GOOGLE_SHEETS_URL: ${{ vars.GOOGLE_SHEETS_URL }}
       - name: Static HTML export with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next export
       #- name: Upload artifact
