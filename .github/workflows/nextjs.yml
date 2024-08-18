@@ -66,8 +66,6 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
         env:
           GOOGLE_SHEETS_URL: ${{ vars.GOOGLE_SHEETS_URL }}
-      - name: Static HTML export with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next export
       #- name: Upload artifact
       #  uses: actions/upload-pages-artifact@v2
       #  with:
