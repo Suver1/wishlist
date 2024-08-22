@@ -20,6 +20,9 @@ async function downloadWishlist() {
     headers: {
       'content-type': 'text/csv;charset=UTF-8',
     },
+    next: {
+      revalidate: 60 * 10,
+    },
   })
   return await response.text()
 }
