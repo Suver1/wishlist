@@ -49,6 +49,7 @@ export default async function Home() {
       </div>
       <div className={`${styles.logoContainer} ${styles.backgroundGradient}`}>
         <Image
+          unoptimized
           className={styles.logo}
           src="/christmas-hat.png"
           alt="Christmas hat"
