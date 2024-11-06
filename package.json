@@ -10,21 +10,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fast-csv/parse": "^4.3.6",
-    "next": "latest",
+    "@fast-csv/parse": "^5.0.2",
+    "next": "^14.2.15",
     "react": "latest",
     "react-dom": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
+    "@types/node": "^20.17.6",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",
-    "eslint-config-next": "latest",
+    "eslint-config-next": "^14.2.15",
     "typescript": "latest"
   },
   "volta": {
-    "node": "20.16.0",
+    "node": "20.18.0",
     "yarn": "1.22.22"
   }
 }
